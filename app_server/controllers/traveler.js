@@ -1,3 +1,5 @@
+var path = require('path');
+
 var renderHomepage = function(req, res) {
   res.render('index', {
     title: 'Travlr Getaways - Home',
@@ -12,8 +14,33 @@ var renderTravelList = function(req, res) {
   });
 };
 
+var renderRooms = function(req, res) {
+  res.sendFile(path.join(__dirname, '../../public/rooms.html'));
+};
+
+var renderMeals = function(req, res) {
+  res.sendFile(path.join(__dirname, '../../public/meals.html'));
+};
+
+var renderNews = function(req, res) {
+  res.sendFile(path.join(__dirname, '../../public/news.html'));
+};
+
+var renderAbout = function(req, res) {
+  res.sendFile(path.join(__dirname, '../../public/about.html'));
+};
+
+var renderContact = function(req, res) {
+  res.sendFile(path.join(__dirname, '../../public/contact.html'));
+};
+
 module.exports = {
   renderHomepage,
-  renderTravelList
+  renderTravelList,
+  renderRooms,
+  renderMeals,
+  renderNews,
+  renderAbout,
+  renderContact
 };
 

@@ -18,10 +18,19 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+// Redirect .html requests to route versions
+app.get('/index.html', function(req, res) {
+  res.redirect('/');
+});
+app.get('/travel.html', function(req, res) {
+  res.redirect('/travel');
+});
 
 app.use('/', travelerRouter);
 app.use('/users', usersRouter);
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
