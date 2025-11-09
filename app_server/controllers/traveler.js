@@ -1,4 +1,3 @@
-var path = require('path');
 
 var renderHomepage = function(req, res) {
   res.render('index', {
@@ -15,23 +14,38 @@ var renderTravelList = function(req, res) {
 };
 
 var renderRooms = function(req, res) {
-  res.sendFile(path.join(__dirname, '../../public/rooms.html'));
+  res.render('rooms', {
+    title: 'Travlr Getaways - Rooms',
+    isRooms: true
+  });
 };
 
 var renderMeals = function(req, res) {
-  res.sendFile(path.join(__dirname, '../../public/meals.html'));
+  res.render('meals', {
+    title: 'Travlr Getaways - Meals',
+    isMeals: true
+  });
 };
 
 var renderNews = function(req, res) {
-  res.sendFile(path.join(__dirname, '../../public/news.html'));
+  res.render('news', {
+    title: 'Travlr Getaways - News',
+    isNews: true
+  });
 };
 
 var renderAbout = function(req, res) {
-  res.sendFile(path.join(__dirname, '../../public/about.html'));
+  res.render('about', {
+    title: 'Travlr Getaways - About',
+    isAbout: true
+  });
 };
 
 var renderContact = function(req, res) {
-  res.sendFile(path.join(__dirname, '../../public/contact.html'));
+  res.render('contact', {
+    title: 'Travlr Getaways - Contact',
+    isContact: true
+  });
 };
 
 module.exports = {

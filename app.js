@@ -26,6 +26,21 @@ app.get('/index.html', function(req, res) {
 app.get('/travel.html', function(req, res) {
   res.redirect('/travel');
 });
+app.get('/rooms.html', function(req, res) {
+  res.redirect('/rooms');
+});
+app.get('/meals.html', function(req, res) {
+  res.redirect('/meals');
+});
+app.get('/news.html', function(req, res) {
+  res.redirect('/news');
+});
+app.get('/about.html', function(req, res) {
+  res.redirect('/about');
+});
+app.get('/contact.html', function(req, res) {
+  res.redirect('/contact');
+});
 
 app.use('/', travelerRouter);
 app.use('/users', usersRouter);

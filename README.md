@@ -17,15 +17,19 @@ travlr/
 │       ├── layout.hbs   # Main layout template
 │       ├── index.hbs    # Home page template
 │       ├── travel.hbs   # Travel page template
+│       ├── rooms.hbs    # Rooms page template
+│       ├── meals.hbs    # Meals page template
+│       ├── news.hbs     # News page template
+│       ├── about.hbs    # About page template
+│       ├── contact.hbs  # Contact page template
 │       └── error.hbs    # Error page template
 ├── bin/                  # Application startup scripts
 │   └── www              # Server entry point
 ├── public/               # Static assets
 │   ├── css/             # Stylesheets
 │   ├── images/          # Image assets
-│   └── *.html           # Static HTML pages (legacy)
+│   └── *.html           # Static HTML pages (legacy, redirected to routes)
 ├── routes/               # Legacy routes
-├── views/                # Legacy views
 ├── app.js               # Express application configuration
 └── package.json         # Dependencies and scripts
 
@@ -69,13 +73,17 @@ The application will be available at `http://localhost:3000`
 
 ## Available Routes
 
-- `GET /` - Home page (HBS template)
-- `GET /travel` - Travel listing page (HBS template)
+All pages use Handlebars (HBS) templates with MVC architecture:
+
+- `GET /` - Home page
+- `GET /travel` - Travel listing page
 - `GET /rooms` - Rooms page
 - `GET /meals` - Meals page
 - `GET /news` - News page
 - `GET /about` - About page
 - `GET /contact` - Contact page
+
+All routes are handled by the traveler controller and render HBS templates with proper navigation highlighting.
 
 ## Technologies
 
@@ -100,6 +108,8 @@ The application will be available at `http://localhost:3000`
 - Route and controller separation
 - Dynamic view rendering with HBS directives
 - Navigation highlighting based on current page
+- All pages converted from static HTML to HBS templates
+- Consistent layout template with shared header/footer
 
 ## License
 
