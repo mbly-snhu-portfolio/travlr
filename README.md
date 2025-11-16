@@ -15,14 +15,19 @@ travlr/
 │   │   └── traveler.js   # Traveler routes
 │   └── views/            # Handlebars templates
 │       ├── layout.hbs   # Main layout template
+│       ├── partials/    # Handlebars partials
+│       │   ├── header.hbs  # Header partial
+│       │   └── footer.hbs  # Footer partial
 │       ├── index.hbs    # Home page template
-│       ├── travel.hbs   # Travel page template
+│       ├── travel.hbs   # Travel page template (dynamic JSON rendering)
 │       ├── rooms.hbs    # Rooms page template
 │       ├── meals.hbs    # Meals page template
 │       ├── news.hbs     # News page template
 │       ├── about.hbs    # About page template
 │       ├── contact.hbs  # Contact page template
 │       └── error.hbs    # Error page template
+├── data/                 # JSON data files
+│   └── trips.json       # Trip data for travel page
 ├── bin/                  # Application startup scripts
 │   └── www              # Server entry point
 ├── public/               # Static assets
@@ -35,9 +40,19 @@ travlr/
 
 ```
 
+## Module 3 Implementation
+
+This module converts static HTML to dynamic Handlebars templates using JSON data:
+
+- **Handlebars Partials**: Header and footer extracted into reusable partials
+- **JSON Data Integration**: Trip data loaded from `data/trips.json` file
+- **Dynamic Rendering**: Travel page uses `{{#each}}` loop to render trips from JSON
+- **MVC Controller Updates**: Controller reads JSON file and passes data to views
+- **Template Engine**: Handlebars partials registered and configured in Express
+
 ## Module 2 Implementation
 
-This module implements MVC architecture with Handlebars templating:
+Module 2 implemented MVC architecture with Handlebars templating:
 
 - **MVC Structure**: Organized code into controllers, routes, and views
 - **Handlebars Templates**: Converted static HTML to dynamic HBS templates
@@ -76,14 +91,14 @@ The application will be available at `http://localhost:3000`
 All pages use Handlebars (HBS) templates with MVC architecture:
 
 - `GET /` - Home page
-- `GET /travel` - Travel listing page
+- `GET /travel` - Travel listing page (dynamically renders trips from JSON data)
 - `GET /rooms` - Rooms page
 - `GET /meals` - Meals page
 - `GET /news` - News page
 - `GET /about` - About page
 - `GET /contact` - Contact page
 
-All routes are handled by the traveler controller and render HBS templates with proper navigation highlighting.
+All routes are handled by the traveler controller and render HBS templates with proper navigation highlighting. The travel page dynamically renders trip data from `data/trips.json` using Handlebars `{{#each}}` directives.
 
 ## Technologies
 
@@ -95,11 +110,20 @@ All routes are handled by the traveler controller and render HBS templates with 
 
 ## Git Branches
 
-- `main` - Main development branch
+- `main` - Main development branch (current)
 - `module-one` - Module 1 implementation
-- `module-two` - Module 2 MVC refactoring (current)
+- `module-two` - Module 2 MVC refactoring
+- `module-three` - Module 3 dynamic templates with JSON (merged to main)
 
 ## Development
+
+### Module 3 Features
+
+- Handlebars partials for header and footer
+- JSON data file (`data/trips.json`) for trip information
+- Dynamic trip rendering using `{{#each}}` Handlebars loop
+- Controller integration with filesystem to read JSON data
+- Static HTML replaced with dynamic templates
 
 ### Module 2 Features
 
