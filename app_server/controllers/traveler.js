@@ -1,3 +1,4 @@
+var fs = require('fs');
 
 var renderHomepage = function(req, res) {
   res.render('index', {
@@ -7,9 +8,11 @@ var renderHomepage = function(req, res) {
 };
 
 var renderTravelList = function(req, res) {
+  var trips = JSON.parse(fs.readFileSync('./data/trips.json', 'utf8'));
   res.render('travel', {
     title: 'Travlr Getaways - Travel',
-    isTravel: true
+    isTravel: true,
+    trips: trips
   });
 };
 
