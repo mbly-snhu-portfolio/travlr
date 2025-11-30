@@ -4,13 +4,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var hbs = require('hbs');
-
+require('./app_api/models/db');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var travelerRouter = require('./app_server/routes/traveler');
-var apiRouter = require('./app_server/routes/api');
+var apiRouter = require('./app_api/routes/index');
 
-require('./app_server/models/db');
+
 
 var app = express();
 
@@ -27,25 +27,25 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Redirect .html requests to route versions
-app.get('/index.html', function(req, res) {
+app.get('/index.html', function (req, res) {
   res.redirect('/');
 });
-app.get('/travel.html', function(req, res) {
+app.get('/travel.html', function (req, res) {
   res.redirect('/travel');
 });
-app.get('/rooms.html', function(req, res) {
+app.get('/rooms.html', function (req, res) {
   res.redirect('/rooms');
 });
-app.get('/meals.html', function(req, res) {
+app.get('/meals.html', function (req, res) {
   res.redirect('/meals');
 });
-app.get('/news.html', function(req, res) {
+app.get('/news.html', function (req, res) {
   res.redirect('/news');
 });
-app.get('/about.html', function(req, res) {
+app.get('/about.html', function (req, res) {
   res.redirect('/about');
 });
-app.get('/contact.html', function(req, res) {
+app.get('/contact.html', function (req, res) {
   res.redirect('/contact');
 });
 
@@ -56,12 +56,12 @@ app.use('/users', usersRouter);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
