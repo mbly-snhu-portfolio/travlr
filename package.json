@@ -7,11 +7,13 @@
     "populate-db": "node bin/populate-db.js"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.21.0",
     "hbs": "~4.2.0",
     "http-errors": "~2.0.0",
+    "jsonwebtoken": "^9.0.3",
     "mongoose": "^8.0.0",
     "morgan": "~1.10.0"
   }

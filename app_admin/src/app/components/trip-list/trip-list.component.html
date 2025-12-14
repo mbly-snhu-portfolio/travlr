@@ -1,0 +1,37 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <h2 class="mb-0">Trips</h2>
+    <div class="text-muted small">Admin SPA — manage trip cards in MongoDB</div>
+  </div>
+  <div class="d-flex gap-2">
+    <button class="btn btn-outline-secondary" type="button" (click)="loadTrips()" [disabled]="loading">
+      Refresh
+    </button>
+    <a class="btn btn-primary" routerLink="/trips/new">Add trip</a>
+  </div>
+</div>
+
+@if (loading) {
+  <div class="alert alert-info">Loading trips…</div>
+}
+
+@if (errorMessage) {
+  <div class="alert alert-danger d-flex justify-content-between align-items-center">
+    <div>{{ errorMessage }}</div>
+    <button class="btn btn-sm btn-light" type="button" (click)="errorMessage = null">Dismiss</button>
+  </div>
+}
+
+@if (!loading && !trips.length) {
+  <div class="alert alert-warning mb-0">No trips found.</div>
+}
+
+@if (trips.length) {
+  <div class="row g-3">
+    @for (trip of trips; track trip.code) {
+      <div class="col-12 col-md-6 col-lg-4">
+        <app-trip-card [trip]="trip" (deleteTrip)="onDeleteTrip($event)"></app-trip-card>
+      </div>
+    }
+  </div>
+}

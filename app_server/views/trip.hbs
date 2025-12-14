@@ -1,0 +1,19 @@
+<div class="box">
+	<div>
+		<div class="body">
+			<h1>{{trip.name}}</h1>
+			<a href="/travel"><strong>&larr; Back to Travel</strong></a>
+			<br><br>
+			<img src="/images/{{trip.image}}" alt="Img" style="border: 1px solid #2c9688;" />
+			<h2>{{trip.code}}</h2>
+			<p>{{trip.description}}</p>
+			<hr>
+			<p>
+				<strong>Length:</strong> {{trip.length}}<br>
+				<strong>Start:</strong> {{trip.start}}<br>
+				<strong>Resort:</strong> {{trip.resort}}<br>
+				<strong>Rate:</strong> ${{trip.perPerson}} / Person
+			</p>
+		</div>
+	</div>
+</div>

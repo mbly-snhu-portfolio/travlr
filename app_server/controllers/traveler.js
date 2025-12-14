@@ -7,7 +7,6 @@ var renderHomepage = function (req, res) {
   });
 };
 
-const tripsEndpoint = 'http://localhost:3000/api/trips';
 const options = {
   method: 'GET',
   headers: {
@@ -15,8 +14,41 @@ const options = {
   }
 };
 
+function getTripsEndpoint(req) {
+  const proto = req.protocol || 'http';
+  const host = req.get('host');
+  return `${proto}://${host}/api/trips`;
+}
+
+var renderTripDetails = async function (req, res) {
+  try {
+    const tripCode = req.params.tripCode;
+    const tripsEndpoint = getTripsEndpoint(req);
+    const response = await fetch(`${tripsEndpoint}/${encodeURIComponent(tripCode)}`, options);
+
+    if (!response.ok) {
+      res.status(response.status).render('error', {
+        message: `Trip not found (${tripCode})`,
+        error: {}
+      });
+      return;
+    }
+
+    const trip = await response.json();
+
+    res.render('trip', {
+      title: `Travlr Getaways - ${trip.name}`,
+      isTravel: true,
+      trip
+    });
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
 var renderTravelList = async function (req, res) {
   try {
+    const tripsEndpoint = getTripsEndpoint(req);
     const response = await fetch(tripsEndpoint, options);
     const json = await response.json();
 
@@ -79,6 +111,7 @@ var renderContact = function (req, res) {
 module.exports = {
   renderHomepage,
   renderTravelList,
+  renderTripDetails,
   renderRooms,
   renderMeals,
   renderNews,

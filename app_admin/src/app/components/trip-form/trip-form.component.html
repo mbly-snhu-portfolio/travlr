@@ -1,0 +1,93 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <h2 class="mb-0">{{ title }}</h2>
+    <div class="text-muted small">Fields map directly to the MongoDB Trip schema.</div>
+  </div>
+  <a class="btn btn-outline-secondary" routerLink="/trips">Back</a>
+</div>
+
+@if (loading) {
+  <div class="alert alert-info">Loading trip…</div>
+}
+
+@if (errorMessage) {
+  <div class="alert alert-danger">{{ errorMessage }}</div>
+}
+
+<form class="card shadow-sm" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="card-body">
+    <div class="row g-3">
+      <div class="col-12 col-md-4">
+        <label class="form-label" for="code">Code</label>
+        <input id="code" class="form-control" type="text" formControlName="code" [readonly]="mode === 'edit'" />
+        @if (form.controls.code.touched && form.controls.code.invalid) {
+          <div class="text-danger small mt-1">Code is required.</div>
+        }
+      </div>
+
+      <div class="col-12 col-md-8">
+        <label class="form-label" for="name">Name</label>
+        <input id="name" class="form-control" type="text" formControlName="name" />
+        @if (form.controls.name.touched && form.controls.name.invalid) {
+          <div class="text-danger small mt-1">Name is required.</div>
+        }
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label class="form-label" for="length">Length</label>
+        <input id="length" class="form-control" type="text" formControlName="length" />
+        @if (form.controls.length.touched && form.controls.length.invalid) {
+          <div class="text-danger small mt-1">Length is required.</div>
+        }
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label class="form-label" for="start">Start</label>
+        <input id="start" class="form-control" type="date" formControlName="start" />
+        @if (form.controls.start.touched && form.controls.start.invalid) {
+          <div class="text-danger small mt-1">Start date is required.</div>
+        }
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label class="form-label" for="resort">Resort</label>
+        <input id="resort" class="form-control" type="text" formControlName="resort" />
+        @if (form.controls.resort.touched && form.controls.resort.invalid) {
+          <div class="text-danger small mt-1">Resort is required.</div>
+        }
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label class="form-label" for="perPerson">Per person</label>
+        <input id="perPerson" class="form-control" type="text" formControlName="perPerson" />
+        @if (form.controls.perPerson.touched && form.controls.perPerson.invalid) {
+          <div class="text-danger small mt-1">Per-person price is required.</div>
+        }
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label class="form-label" for="image">Image filename</label>
+        <input id="image" class="form-control" type="text" formControlName="image" placeholder="reef1.jpg" />
+        <div class="text-muted small mt-1">Images are served from Express at <code>/images</code>.</div>
+        @if (form.controls.image.touched && form.controls.image.invalid) {
+          <div class="text-danger small mt-1">Image filename is required.</div>
+        }
+      </div>
+
+      <div class="col-12">
+        <label class="form-label" for="description">Description</label>
+        <textarea id="description" class="form-control" rows="4" formControlName="description"></textarea>
+        @if (form.controls.description.touched && form.controls.description.invalid) {
+          <div class="text-danger small mt-1">Description is required.</div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer bg-white d-flex gap-2">
+    <button class="btn btn-primary" type="submit" [disabled]="saving || loading">
+      @if (saving) { Saving… } @else { Save }
+    </button>
+    <a class="btn btn-outline-secondary" routerLink="/trips">Cancel</a>
+  </div>
+</form>

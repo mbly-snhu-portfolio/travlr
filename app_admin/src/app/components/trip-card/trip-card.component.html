@@ -1,0 +1,39 @@
+<div class="card h-100 shadow-sm">
+  <img
+    class="card-img-top"
+    [src]="imageUrl"
+    [alt]="trip.name"
+    style="object-fit: cover; height: 180px;"
+  />
+
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-start gap-2">
+      <h5 class="card-title mb-0">{{ trip.name }}</h5>
+      <span class="badge text-bg-secondary">{{ trip.code }}</span>
+    </div>
+
+    <div class="mt-2 small text-muted">
+      <div><strong>Length:</strong> {{ trip.length }}</div>
+      <div><strong>Start:</strong> {{ trip.start | date: 'yyyy-MM-dd' }}</div>
+      <div><strong>Resort:</strong> {{ trip.resort }}</div>
+      <div><strong>Per person:</strong> ${{ trip.perPerson }}</div>
+    </div>
+
+    <p class="mt-2 mb-0">{{ trip.description }}</p>
+  </div>
+
+  <div class="card-footer bg-white border-top-0 pt-0">
+    <div class="d-flex gap-2">
+      @if (auth.isLoggedIn$ | async) {
+        <a class="btn btn-outline-primary btn-sm" [routerLink]="['/trips', trip.code, 'edit']">
+          Edit
+        </a>
+        <button class="btn btn-outline-danger btn-sm" type="button" (click)="onDeleteClick()">
+          Delete
+        </button>
+      } @else {
+        <span class="text-muted small">Login to edit or delete.</span>
+      }
+    </div>
+  </div>
+</div>
